@@ -1,0 +1,103 @@
+<div class="container mt-4">
+
+  <h3 class="titulo-seccion estudiantes">Estudiantes</h3>
+
+  <div class="row">
+
+    <!-- FORMULARIO -->
+    <div class="col-md-4">
+      <div class="card shadow rounded-4">
+        <div class="card-header bg-primary text-white text-center">
+          <h5>Gestión de Estudiantes</h5>
+        </div>
+
+        <div class="card-body">
+
+          <form (ngSubmit)="guardar(form)" #form="ngForm">
+
+            <input class="form-control mb-2"
+              name="nombreEstudiante"
+              [(ngModel)]="estudiante.nombreEstudiante"
+              placeholder="Nombre"
+              required>
+
+            <input class="form-control mb-2"
+              name="apellidoEstudiante"
+              [(ngModel)]="estudiante.apellidoEstudiante"
+              placeholder="Apellido"
+              required>
+
+            <input class="form-control mb-2"
+              name="emailEstudiante"
+              [(ngModel)]="estudiante.emailEstudiante"
+              placeholder="Email">
+
+            <input class="form-control mb-2"
+              name="direccionEstudiante"
+              [(ngModel)]="estudiante.direccionEstudiante"
+              placeholder="Dirección">
+
+            <input class="form-control mb-2"
+              name="celularEstudiante"
+              [(ngModel)]="estudiante.celularEstudiante"
+              placeholder="Celular">
+
+            <button class="btn btn-success w-100">
+              Guardar
+            </button>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="col-md-8">
+      <div class="card shadow rounded-4">
+        <div class="card-header bg-dark text-white text-center">
+          <h5>Lista de Estudiantes</h5>
+        </div>
+
+        <div class="card-body table-responsive">
+
+          <table class="table table-hover">
+
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let e of estudiantes">
+                <td>{{ e.nombreEstudiante }}</td>
+                <td>{{ e.apellidoEstudiante }}</td>
+                <td>{{ e.emailEstudiante }}</td>
+
+                <td>
+                  <button class="btn btn-warning btn-sm me-1"
+                    (click)="editar(e)">
+                    Editar
+                  </button>
+
+                  <button class="btn btn-danger btn-sm"
+                    (click)="eliminar(e.idEstudiante)">
+                    Eliminar
+                  </button>
+                </td>
+
+              </tr>
+            </tbody>
+
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

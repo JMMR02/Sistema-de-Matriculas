@@ -1,0 +1,131 @@
+<div class="container mt-4">
+  <div class="row g-4">
+
+    <!-- FORMULARIO -->
+    <div class="col-md-4">
+      <div class="card shadow rounded-4">
+        <div class="card-header bg-primary text-white text-center">
+          <h5>Gestión de Cursos</h5>
+        </div>
+
+        <div class="card-body">
+
+          <form #form="ngForm" (ngSubmit)="guardarCurso(form)">
+
+            <div class="mb-3">
+              <input 
+                type="text" 
+                class="form-control"
+                name="nombreCurso"
+                [(ngModel)]="cursoSeleccionado.nombreCurso"
+                placeholder="Nombre del curso"
+                required>
+            </div>
+
+            <div class="mb-3">
+              <input 
+                type="text" 
+                class="form-control"
+                name="descripcionCurso"
+                [(ngModel)]="cursoSeleccionado.descripcionCurso"
+                placeholder="Descripción"
+                required>
+            </div>
+
+            <div class="mb-3">
+              <input 
+                type="text" 
+                class="form-control"
+                name="estadoCurso"
+                [(ngModel)]="cursoSeleccionado.estadoCurso"
+                placeholder="Estado"
+                required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+
+              <button 
+                type="button"
+                (click)="limpiar(form)"
+                class="btn btn-outline-secondary btn-sm">
+                Limpiar
+              </button>
+
+              <button 
+                type="submit"
+                class="btn btn-success btn-sm">
+                {{ cursoSeleccionado.idCurso > 0 ? 'Actualizar' : 'Guardar' }}
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="col-md-8">
+      <div class="card shadow rounded-4">
+        <div class="card-header bg-dark text-white text-center">
+          <h5 class="mb-0">Lista de Cursos</h5>
+        </div>
+
+        <div class="card-body">
+
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Curso</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr *ngFor="let curso of cursoService.cursos">
+
+                <td>{{ curso.nombreCurso }}</td>
+                <td>{{ curso.descripcionCurso }}</td>
+
+                <td>
+                  <span 
+                    class="badge"
+                    [ngClass]="curso.estadoCurso === 'Activo' ? 'bg-success' : 'bg-secondary'">
+                    {{ curso.estadoCurso }}
+                  </span>
+                </td>
+
+                <td class="text-center">
+
+                  <button 
+                    type="button"
+                    (click)="editarCurso(curso)"
+                    class="btn btn-edit me-2">
+                    Editar
+                  </button>
+
+                  <button 
+                    type="button"
+                    (click)="eliminarCurso(curso.idCurso)"
+                    class="btn btn-delete">
+                    Eliminar
+                  </button>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
